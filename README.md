@@ -3,7 +3,53 @@
 A full-stack web application built with Django REST Framework (backend) and React (frontend). It enables users to securely log in, and then search for, add, update, and delete trainer profiles.
 
 ---
+# **Demo Mode (Frontend Only)**
+Demo Mode lets the React app run **without Django backend** using localStorage.
 
+**https://shreeja-88.github.io/home**
+
+### How it works
+- Loads sample data from `demoApi.js`
+- CRUD (Add, Edit, Delete) uses localStorage
+- Search filters work fully in frontend
+- Login is simulated (any credentials accepted)
+- Perfect for GitHub Pages deployment
+
+### Run Demo Mode locally
+```bash
+cd frontend/trainers
+npm install
+npm run dev
+````
+Open → [http://localhost:5173/](http://localhost:5173/)
+
+### Deploy Demo Mode to GitHub Pages
+
+```bash
+npm run build
+npm run deploy
+```
+
+Live demo example:
+[https://shreeja-88.github.io/home](https://shreeja-88.github.io/home)
+
+### Reset Demo Data
+
+```js
+localStorage.clear()
+```
+
+### Switch back to real backend
+
+* Replace demo imports:
+  `../utils/demoApi` → `../api`
+* Uncomment Axios API calls
+* Set API URL in `.env`:
+
+  ```
+  VITE_API_BASE_URL=http://127.0.0.1:8000/
+  ```
+--- 
 ## Tech Stack
 
 **Backend**  
@@ -105,6 +151,8 @@ TRAINER-S-SEARCH-APP/
 └── README.md
 
 ````
+---
+
 
 ## Getting Started
 
