@@ -1,3 +1,7 @@
+/* ---------------------------------------------------------
+   ORIGINAL BACKEND VERSION 
+-----------------------------------------------------------
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -20,12 +24,56 @@ export const SearchTrainer = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     const query = new URLSearchParams(filters).toString();
-    navigate(`/list?${query}`);   // 🔥 Redirect to /list
+    navigate(`/list?${query}`);
+  };
+
+  return (
+    ...form code...
+  );
+};
+
+-----------------------------------------------------------
+ END BACKEND VERSION
+-----------------------------------------------------------*/
+
+
+
+// ========================================================
+// DEMO MODE VERSION (WORKING — NO BACKEND NEEDED)
+// ========================================================
+
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+export const SearchTrainer = () => {
+  const navigate = useNavigate();
+
+  const [filters, setFilters] = useState({
+    name: "",
+    place: "",
+    technology: "",
+  });
+
+  const handleChange = (e) => {
+    setFilters({
+      ...filters,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Demo Mode — simply redirect to /list with query parameters
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const query = new URLSearchParams(filters).toString();
+    navigate(`/list?${query}`); // TrainersList will filter these
   };
 
   return (
     <div className="container mt-4">
-      <h2 className="text-center" style={{ color: "#493129", fontWeight: "700" }}>
+      <h2
+        className="text-center"
+        style={{ color: "#493129", fontWeight: "700" }}
+      >
         Search Trainers
       </h2>
 
@@ -34,6 +82,7 @@ export const SearchTrainer = () => {
         className="p-4 mt-4 rounded"
         style={{ backgroundColor: "#f1dec7", border: "2px solid #8b597b" }}
       >
+        {/* Name */}
         <div className="mb-3">
           <label className="form-label" style={{ fontWeight: "600" }}>
             Name
@@ -48,6 +97,7 @@ export const SearchTrainer = () => {
           />
         </div>
 
+        {/* Place */}
         <div className="mb-3">
           <label className="form-label" style={{ fontWeight: "600" }}>
             Place
@@ -62,6 +112,7 @@ export const SearchTrainer = () => {
           />
         </div>
 
+        {/* Technology */}
         <div className="mb-3">
           <label className="form-label" style={{ fontWeight: "600" }}>
             Technology
@@ -76,6 +127,7 @@ export const SearchTrainer = () => {
           />
         </div>
 
+        {/* Submit */}
         <button
           type="submit"
           className="btn"

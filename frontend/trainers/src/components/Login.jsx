@@ -11,10 +11,12 @@ export const Login = () => {
     e.preventDefault();
 
     try {
-      const data = await LoginApi(username, password);
+      //const data = await LoginApi(username, password);
 
-      localStorage.setItem("access", data.access);
-      localStorage.setItem("refresh", data.refresh);
+      //localStorage.setItem("access", data.access);
+      //localStorage.setItem("refresh", data.refresh);
+
+      localStorage.setItem("demo_logged_in", "true");
 
       navigate("/home");
     } catch (error) {

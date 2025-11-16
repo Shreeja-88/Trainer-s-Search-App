@@ -1,3 +1,7 @@
+// ---------------------------
+// ORIGINAL BACKEND VERSION
+// ---------------------------
+/*
 import React, { useState } from "react";
 import { addTrainer } from "../api";
 import { useNavigate } from "react-router-dom";
@@ -26,11 +30,53 @@ export const AddTrainer = () => {
     try {
       await addTrainer(trainer);
       alert("Trainer added successfully!");
-      navigate("/list"); // 🔥 Redirect to trainer list
+      navigate("/list");
     } catch (err) {
       console.error("Error adding trainer:", err);
       alert("Failed to add trainer. Check console.");
     }
+  };
+
+  return (
+    ...your JSX...
+  );
+};
+*/
+
+// --------------------------------------------------------
+// DEMO MODE VERSION (Fully working without backend)
+// --------------------------------------------------------
+
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { addTrainer as demoAddTrainer } from "../utils/demoApi";
+
+export const AddTrainer = () => {
+  const navigate = useNavigate();
+
+  const [trainer, setTrainer] = useState({
+    name: "",
+    place: "",
+    phone: "",
+    email: "",
+    technology1: "",
+    technology2: "",
+  });
+
+  const handleChange = (e) => {
+    setTrainer({
+      ...trainer,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    demoAddTrainer(trainer); // DEMO MODE ADD
+    alert("Trainer added successfully! (Demo Mode)");
+    navigate("/list"); // Redirect to trainers page
   };
 
   return (
@@ -107,7 +153,7 @@ export const AddTrainer = () => {
           />
         </div>
 
-        {/* Tech 1 */}
+        {/* Technology 1 */}
         <div className="mb-3">
           <label className="form-label" style={{ fontWeight: "600" }}>
             Technology 1
@@ -122,7 +168,7 @@ export const AddTrainer = () => {
           />
         </div>
 
-        {/* Tech 2 */}
+        {/* Technology 2 */}
         <div className="mb-3">
           <label className="form-label" style={{ fontWeight: "600" }}>
             Technology 2

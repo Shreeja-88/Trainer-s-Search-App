@@ -1,3 +1,7 @@
+/* ---------------------------------------------------------
+   ORIGINAL BACKEND VERSION 
+-----------------------------------------------------------
+
 import React, { useEffect, useState } from "react";
 import { searchTrainer, deleteTrainer } from "../api";
 import { Link, useLocation } from "react-router-dom";
@@ -35,6 +39,71 @@ export const TrainersList = () => {
       } catch (err) {
         console.error("Error deleting trainer:", err);
       }
+    }
+  };
+
+  return (
+    ...TABLE CODE...
+  );
+};
+
+----------------------------------------------------------
+ END OF BACKEND VERSION
+----------------------------------------------------------*/
+
+
+
+// ========================================================
+// DEMO MODE VERSION (Runs instead of backend)
+// Uses localStorage & sampleTrainers
+// ========================================================
+
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+
+import {
+  getTrainers,
+  deleteTrainer as demoDeleteTrainer,
+} from "../utils/demoApi";
+
+export const TrainersList = () => {
+  const [trainers, setTrainers] = useState([]);
+  const location = useLocation();
+
+  // ============================
+  // APPLY FILTERS (Demo Mode)
+  // ============================
+  useEffect(() => {
+    const all = getTrainers();
+
+    const query = new URLSearchParams(location.search);
+
+    const nameFilter = query.get("name")?.toLowerCase() || "";
+    const placeFilter = query.get("place")?.toLowerCase() || "";
+    const techFilter = query.get("technology")?.toLowerCase() || "";
+
+    const filtered = all.filter((t) => {
+      return (
+        t.name.toLowerCase().includes(nameFilter) &&
+        t.place.toLowerCase().includes(placeFilter) &&
+        (t.technology1.toLowerCase().includes(techFilter) ||
+          t.technology2.toLowerCase().includes(techFilter))
+      );
+    });
+
+    setTrainers(filtered);
+  }, [location.search]);
+
+  // ============================
+  // DELETE TRAINER (Demo Mode)
+  // ============================
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this trainer?")) {
+      demoDeleteTrainer(id);
+      alert("Trainer deleted (Demo Mode)");
+
+      const updated = getTrainers();
+      setTrainers(updated);
     }
   };
 
@@ -106,7 +175,7 @@ export const TrainersList = () => {
                   <td style={{ borderRight: "1px solid #e6d5d0" }}>{t.phone}</td>
 
                   <td>
-                    {/* VIEW BUTTON WITH ALERT */}
+                    {/* VIEW BUTTON */}
                     <button
                       className="btn btn-sm"
                       style={{
@@ -125,6 +194,7 @@ export const TrainersList = () => {
                       View
                     </button>
 
+                    {/* UPDATE BUTTON */}
                     <Link
                       to={`/update/${t.id}`}
                       className="btn btn-sm"
@@ -139,6 +209,7 @@ export const TrainersList = () => {
                       Update
                     </Link>
 
+                    {/* DELETE BUTTON */}
                     <button
                       className="btn btn-sm"
                       style={{
