@@ -6,7 +6,7 @@ A full-stack web application built with Django REST Framework (backend) and Reac
 # **Demo Mode (Frontend Only)**
 Demo Mode lets the React app run **without Django backend** using localStorage.
 
-[**https://shreeja-88.github.io/home**](https://shreeja-88.github.io/Trainer-s-Search-App/)
+- Click here to check demo of this application 👉 [**Visit Demo Website**](https://shreeja-88.github.io/home)
 
 ### How it works
 - Loads sample data from `demoApi.js`
